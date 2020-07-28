@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Django Test Home Page</title>
-</head>
-<br>
-<h2>Hello From Home Page</h2>
-<hr>
-<p> Welcome to Django This is my First Page</p>
-<br>
-<p>University : {{  university }}</p>
-<p>Department : {{  department }}</p>
-</body>
-</html>
+{% extends 'homebase.html' %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+{% block slider %} {% include 'slider.html' %} {% endblock %}
+{% block body %} {% include 'content.html' %}  {% endblock %}
