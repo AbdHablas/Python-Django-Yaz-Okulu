@@ -1,7 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
+from django.utils.safestring import mark_safe
+
+
 class Category(models.Model):
     STATUS = (
         ('True', 'True'),
@@ -19,6 +21,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 
 class Car(models.Model):
@@ -48,6 +52,12 @@ class Car(models.Model):
     def __str__(self):
         return self.title
 
+    def image_tag(self):
+        if self.image.url is not None:
+            return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        else:
+            return ""
+
 
 class Image(models.Model):
     Car = models.ForeignKey(Car, related_name="Images", on_delete=models.CASCADE)
@@ -56,3 +66,9 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title
+
+    def image_tag(self):
+        if self.image.url is not None:
+            return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        else:
+            return ""
