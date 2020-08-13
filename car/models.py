@@ -27,7 +27,6 @@ class Car(models.Model):
         ('False', 'False'),
     )
 
-
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # many to one relationship with category
     title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
@@ -49,3 +48,11 @@ class Car(models.Model):
     def __str__(self):
         return self.title
 
+
+class Image(models.Model):
+    Car = models.ForeignKey(Car, related_name="Images", on_delete=models.CASCADE)
+    title = models.CharField(blank=True, max_length=50)
+    image = models.ImageField(blank=True, upload_to='images/')
+
+    def __str__(self):
+        return self.title
