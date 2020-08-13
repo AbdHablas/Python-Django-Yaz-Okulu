@@ -15,7 +15,7 @@ admin.site.register(Category, CategoryAdmin)
 class CarAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'rent_price', 'description', 'passenger_amount',
                     'door_number', 'Bag', 'transmission_type', 'miles', 'details', 'parent', 'status']
-    list_filter = ['category']
+    list_filter = ['category','status']
 
 
 admin.site.register(Car, CarAdmin)

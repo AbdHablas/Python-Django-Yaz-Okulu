@@ -27,8 +27,9 @@ class Car(models.Model):
         ('False', 'False'),
     )
 
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # many to one relationship with category
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     image = models.ImageField(blank=True, upload_to='images/')
@@ -37,7 +38,7 @@ class Car(models.Model):
     Bag = models.CharField(max_length=10, choices=STATUS, null=True, blank=True)
     transmission_type = models.CharField(max_length=255, null=True, blank=True)
     miles = models.CharField(max_length=255, null=True, blank=True)
-    rent_price = models.FloatField()
+    rent_price = models.IntegerField()
     details = models.TextField()
     status = models.CharField(max_length=255, choices=STATUS)
     slug = models.SlugField()
@@ -47,3 +48,4 @@ class Car(models.Model):
 
     def __str__(self):
         return self.title
+

@@ -1,9 +1,17 @@
 {% extends 'homebase.html' %}
 
-{% block title %} {{ setting.title }} {% endblock %}
-{% block description %} {{ setting.description }} {% endblock %}
-{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% load static %}
 
-{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
-{% block slider %} {% include 'slider.html' %} {% endblock %}
-{% block body %} {% include 'content.html' %}  {% endblock %}
+{% block title %} Index Page {% endblock %}
+{% block description %} description {% endblock %}
+{% block keywords %} keywords {% endblock %}
+
+
+{% block slider %}
+            {% include 'slider.html' %}
+{% endblock %}
+
+{% block content %}
+            {% include 'content.html' %}
+{% endblock %}
+
