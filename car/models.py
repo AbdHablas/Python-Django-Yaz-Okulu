@@ -23,8 +23,6 @@ class Category(models.Model):
         return self.title
 
 
-
-
 class Car(models.Model):
     STATUS = (
         ('True', 'True'),

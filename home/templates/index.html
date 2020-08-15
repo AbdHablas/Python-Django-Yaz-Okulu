@@ -2,10 +2,14 @@
 
 {% load static %}
 
-{% block title %} Index Page {% endblock %}
-{% block description %} description {% endblock %}
-{% block keywords %} keywords {% endblock %}
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
 
+
+{% block head %}
+            <link rel='shourtcut icon ' type='/image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
 
 {% block slider %}
             {% include 'slider.html' %}
