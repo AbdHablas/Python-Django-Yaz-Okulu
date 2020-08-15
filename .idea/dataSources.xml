@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Django default" uuid="a35d0f74-15fa-4efc-9ce7-9f6a103e1ce1">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/RentalCar/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\abdul\OneDrive\Documents\GitHub\Python-Django-Yaz\Python-Django-Yaz-Okulu\db.sqlite3</jdbc-url>
+    </data-source>
+  </component>
+</project>

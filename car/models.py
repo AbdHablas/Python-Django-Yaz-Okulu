@@ -1,7 +1,8 @@
 from django.db import models
-
 # Create your models here.
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.db import models
 
 
 class Category(models.Model):
@@ -40,7 +41,7 @@ class Car(models.Model):
     transmission_type = models.CharField(max_length=255, null=True, blank=True)
     miles = models.CharField(max_length=255, null=True, blank=True)
     rent_price = models.IntegerField()
-    details = models.TextField()
+    details = RichTextUploadingField(blank=True)
     status = models.CharField(max_length=255, choices=STATUS)
     slug = models.SlugField()
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)

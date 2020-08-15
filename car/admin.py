@@ -1,12 +1,12 @@
 # Register your models here.
 from django.contrib import admin
 
-from .models import Category, Car, Image
+from car.models import Category, Car, Image
 
 
 class CarImageInline(admin.TabularInline):
     model = Image
-    extra = 8
+    extra = 5
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -14,10 +14,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ['status']
 
 
-
 class CarAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'rent_price', 'description', 'passenger_amount',
-                    'door_number', 'image_tag', 'Bag', 'transmission_type', 'miles', 'details', 'parent', 'status']
+                    'door_number', 'image_tag', 'Bag', 'transmission_type', 'miles', 'parent', 'status']
     readonly_fields = ('image_tag',)
     list_filter = ['category', 'status']
     inlines = [CarImageInline]
