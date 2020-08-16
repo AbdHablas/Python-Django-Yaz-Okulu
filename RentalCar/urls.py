@@ -23,6 +23,7 @@ from home import views
 
 urlpatterns = [
     path('', include('home.urls')),
+    path('references', views.references, name='references'),
     path('about', views.about, name='about'),
     path('home/', include('home.urls')),
     path('car/', include('car.urls')),
