@@ -435,7 +435,7 @@ h1, h2, h3, h4, h5,
   position: absolute;
   top: 0;
   width: 100%;
-  padding: 1rem; }
+}
   @media (max-width: 991.98px) {
     .site-navbar {
       padding-top: 3rem;
