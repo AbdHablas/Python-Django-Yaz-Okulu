@@ -9,6 +9,12 @@
 
 {% block head %}
             <link rel='shourtcut icon ' type='/image/x-icon' href='{{ setting.icon.url }}'/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 {% endblock %}
 
 {% block slider %}
@@ -37,7 +43,7 @@
       <div class="container">
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
-          <h2>Contact Us Or Use This Form To Rent A Car</h2>
+          <h2 style="color:#0069d9">Contact Us Or Use This Form To Rent A Car</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
         </div>
       </div>
@@ -73,19 +79,26 @@
           </div>
           <div class="col-lg-4 ml-auto">
             <div class="testimonial-2">
-              <h3 class="text-black mb-4">Contact Info</h3>
+              <h3  class="text-black mb-4" >Contact Info</h3>
               <ul class="list-unstyled footer-link">
                 <li class="d-block mb-3">
-                  <span class="d-block text-black">Address:</span>
+                  <span class="d-block text-black"> <i class="fas fa-home fa-2x"></i> Address:</span>
                             {{ setting.address | safe }}
-                <li class="d-block mb-3"><span class="d-block text-black">Phone:</span> {{ setting.phone | safe }}</li>
-                <li class="d-block mb-3"><span class="d-block text-black">Email:</span> {{ setting.email | safe }}</li>
+                <li class="d-block mb-3"><span class="d-block text-black"><i class="fas fa-phone fa-1x"></i> Phone:</span> {{ setting.phone | safe }}</li>
+                <li class="d-block mb-3"><span class="d-block text-black"><i class="fas fa-envelope fa-1x"></i> Email:</span> {{ setting.email | safe }}</li>
                 <li class="d-block mb-3"><span class="d-block text-black">Fax:  </span> {{ setting.fax | safe }}</li>
               </ul>
             </div>
           </div>
         </div>
+          <div class="container-fluid">
+             <div class="row">
+              <iframe src="https://www.google.com/maps/place/Karab%C3%BCk+University/@41.2106686,32.6533132,17z/data=!3m1!4b1!4m5!3m4!1s0x408354ac4492953f:0xab3b48ed0392a743!8m2!3d41.2106646!4d32.6555019?hl=en-GB" width="100%" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+             </div>
+          </div>
       </div>
     </div>
+
+
 {% endblock %}
 
