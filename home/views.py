@@ -21,3 +21,8 @@ def references(request):
     setting = Setting.objects.get(pk=1)
     context = {'setting': setting, 'page': 'references'}
     return render(request, 'references.html', context)
+
+def contact(request):
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting, 'page': 'contact'}
+    return render(request, 'contact.html', context)
