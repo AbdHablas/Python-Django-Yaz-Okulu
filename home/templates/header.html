@@ -37,7 +37,8 @@
                                                         {% for SubCategory in categories %}
                                                             {% if SubCategory.parent_id == Category.id %}
                                                                 <li><a class="dropdown-item"
-                                                                       href="car/{{ SubCategory}}">{{ SubCategory.title }}</a></li>
+                                                                       href="car/{{ SubCategory }}">{{ SubCategory.title }}</a>
+                                                                </li>
                                                             {% endif %}
                                                         {% endfor %}
                                                     </ul>
