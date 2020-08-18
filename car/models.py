@@ -1,3 +1,5 @@
+from audioop import reverse
+
 from django.db import models
 # Create your models here.
 from django.utils.safestring import mark_safe
@@ -22,8 +24,13 @@ class Category(MPTTModel):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title
+    def __str__(self):  # __str__ method elaborated later in
+        full_path = [self.title]  # post.  use __unicode__ in place of
+        k = self.parent
+        while k is not None:
+            full_path.append(k.title)
+            k = k.parent
+        return ' / '.join(full_path[::-1])
 
 
 class Car(models.Model):

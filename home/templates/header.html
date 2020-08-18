@@ -1,44 +1,113 @@
 {% load static %}
-
+{% load myapptags %}
 <!DOCTYPE html>
 <header class="site-navbar site-navbar-target" role="banner">
 
-        <div class="container">
-          <div class="row align-items-center position-relative">
+    <div class="container">
+        <div class="row align-items-center position-relative">
 
             <div class="col-3">
-              <div class="site-logo">
-                <a href="index.html"><strong >CarRental</strong></a>
-              </div>
+                <div class="site-logo">
+                    <a href="index.html"><strong>CarRental</strong></a>
+                </div>
             </div>
 
             <div class="col-9  text-right">
 
-              <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span class="icon-menu h3 text-black"></span></a></span>
+                <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span
+                        class="icon-menu h3 text-black"></span></a></span>
 
-              <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-                <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                  <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-                  <li><a href="listing.html" class="nav-link">Listing</a></li>
-                  <li><a href="references.html" class="nav-link">References</a></li>
-                  <li><a href="blog.html" class="nav-link">Blog</a></li>
-                  <li><a href="about.html" class="nav-link">About</a></li>
-                  <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-              </nav>
+                <nav class="navbar navbar-expand-md site-navigation text-right ml-auto d-none d-lg-block navbar-hover"
+                     role="navigation">
+
+                    <div class="collapse navbar-collapse" id="navbarHover">
+                        <ul class="site-menu main-menu js-clone-nav navbar-nav ml-auto ">
+                            <li class="nav-item dropdown blackItem">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    Categories
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% if categories %}
+                                        {% for Category in categories %}
+                                            {% if Category.parent_id == None %}
+                                                <li><a class="dropdown-item dropdown-toggle"
+                                                       href="car/{{ Category }}">{{ Category.title }}</a>
+                                                    <ul class="dropdown-menu">
+                                                        {% for SubCategory in categories %}
+                                                            {% if SubCategory.parent_id == Category.id %}
+                                                                <li><a class="dropdown-item"
+                                                                       href="car/{{ SubCategory}}">{{ SubCategory.title }}</a></li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </li>
+                            <li class="active"><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="ListCar.html" class="nav-link">Listing</a></li>
+                            <li><a href="references.html" class="nav-link">References</a></li>
+                            <li><a href="blog.html" class="nav-link">Blog</a></li>
+                            <li><a href="about.html" class="nav-link">About</a></li>
+                            <li><a href="contact.html" class="nav-link">Contact</a></li>
+
+                        </ul>
+                    </div>
+                </nav>
+                <style>
+
+                    /* hover dropdown menus
+                    @media only screen and (max-width: 991px) {
+                        .navbar-hover .show > .dropdown-toggle::after{
+                            transform: rotate(-90deg);
+                        }
+                    }*/
+                    @media only screen and (min-width: 992px) {
+                        .navbar-hover .collapse ul li {
+                            position: relative;
+                        }
+
+                        .navbar-hover .collapse ul li:hover > ul {
+                            display: block
+                        }
+
+                        .navbar-hover .collapse ul ul {
+                            position: absolute;
+                            top: 100%;
+                            left: 0;
+                            min-width: 250px;
+                            display: none
+                        }
+
+                        .navbar-hover .collapse ul ul ul {
+                            position: absolute;
+                            top: 0;
+                            left: 100%;
+                            min-width: 250px;
+                            display: none
+                        }
+
+                        /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
+                    }
+                </style>
             </div>
 
 
-          </div>
         </div>
+    </div>
     <style>
         header.site-navbar.site-navbar-target {
-            height: 60px;
+            height: 65px;
             background: #007bffe0;
             box-shadow: 0px 0px 8px 1px #000000;
             position: fixed;
-}     .site-logo a strong,.site-menu.main-menu.js-clone-nav.ml-auto li a{
-    color: #fff!important;
-}
+        }
+
+        .site-logo a strong, .site-menu.main-menu.js-clone-nav.ml-auto > li > a {
+            color: #fff !important;
+        }
     </style>
-      </header>
+</header>

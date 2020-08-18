@@ -53,14 +53,14 @@ class CategoryAdmin2(DraggableMPTTAdmin):
 
 class CarAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'rent_price', 'description', 'passenger_amount',
-                    'door_number', 'Bag', 'transmission_type', 'miles', 'parent', 'status']
+                    'door_number', 'Bag', 'transmission_type', 'image_tag', 'miles', 'parent', 'status']
     readonly_fields = ('image_tag',)
     list_filter = ['category', 'status']
     inlines = [CarImageInline]
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ['title', 'Car']
+    list_display = ['title', 'Car', 'image_tag']
     readonly_fields = ('image_tag',)
 
 
