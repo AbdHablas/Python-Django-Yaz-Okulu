@@ -6,7 +6,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from car.models import Car, Category
+from home.forms import SearchForm
 from home.models import Setting, ContactMessage, ContactForm
+from home import views
 
 
 def index(request):
@@ -22,8 +24,14 @@ def ListCar(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Car.objects.all()[:1]
     categories = Category.objects.all()
-    cars = Car.objects.all()
-    context = {'setting': setting, 'page': 'home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
+    cat_id = request.GET.get('cat', '')
+    sub_categories = Category.objects.extra(where=["parent_id='" + cat_id + "'"]).values_list('id', flat=True)
+    cat_ids = []
+    for sub_category in sub_categories:
+        cat_ids.append(sub_category)
+    cat_ids.append(cat_id)
+    cars = Car.objects.filter(category_id__in=cat_ids)
+    context = {'setting': setting, 'page': 'Home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
     return render(request, 'ListCar.html', context)
 
 
@@ -66,3 +74,19 @@ def contact(request):
             return render(request, 'contact.html', context)
     context = {'setting': setting, 'page': 'contact', 'categories': categories}
     return render(request, 'contact.html', context)
+
+
+def search(request):
+    if request.method == 'POST':  # check post
+        form = SearchForm(request.POST)
+        query = request.POST['Search']
+        cars = Car.objects.all()
+        cars = Car.objects.filter(title__icontains=query)  # SELECT * FROM product WHERE title LIKE '%query%'
+        context = {'cars': cars, 'searchname': query}
+        return render(request, 'search_car.html', context)
+    setting = Setting.objects.get(pk=1)
+    sliderdata = Car.objects.all()[:1]
+    categories = Category.objects.all()
+    cars = Car.objects.all()
+    context = {'setting': setting, 'page': 'home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
+    return render(request, 'index.html', context)

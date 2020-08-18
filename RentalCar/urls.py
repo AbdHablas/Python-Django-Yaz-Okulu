@@ -30,7 +30,8 @@ urlpatterns = [
     path('car/', include('car.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-
+    path('search/', views.search, name='search.urls'),
+    path('category/<int:id>/<slug:slug>', views.ListCar, name='ListCar'),
 
 ]
 if settings.DEBUG:
