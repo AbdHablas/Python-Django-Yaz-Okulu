@@ -14,10 +14,10 @@
                 <div class="col-lg-5">
 
                     <div class="intro">
-                        <h1><strong style="color:whitesmoke">Contact</strong></h1>
+                        <h1><strong style="color:whitesmoke"> Cars List</strong></h1>
                         <div class="custom-breadcrumbs"><a href="index.html" style="color:whitesmoke">Home</a> <span
                                 class="mx-2" style="color:whitesmoke">/</span> <strong
-                                style="color:whitesmoke">Contact</strong></div>
+                                style="color:whitesmoke">Cars List</strong></div>
                     </div>
 
                 </div>
@@ -35,7 +35,7 @@
             <div class="col-lg-8">
                 {% for Category in categories %}
                     {% if Category.parent_id == None %}
-                        <button type="button" class="btn btn-outline-primary">{{ Category.title }}</button>
+                        <button onclick="window.location.href='ListCar?cat='+{{ Category.id }}" class="btn btn-outline-primary">{{ Category.title }}</button>
                     {% endif %}
                 {% endfor %}
             </div>

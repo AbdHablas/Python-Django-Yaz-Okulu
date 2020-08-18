@@ -1,0 +1,95 @@
+{% extends 'homebase.html' %}
+{% load i18n %}
+
+{% load static %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+
+{% block head %}
+    <link rel='shourtcut icon ' type='/image/x-icon' href='{{ setting.icon.url }}'/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="hero inner-page" style="background-image: url('../static/images/01.jpg');">
+
+        <div class="container">
+            <div class="row align-items-end ">
+                <div class="col-lg-5">
+
+                    <div class="intro">
+                        <h1><strong style="color:whitesmoke">Search Result</strong></h1>
+                        <div class="custom-breadcrumbs"><a href="index.html" style="color:whitesmoke">Home</a> <span
+                                class="mx-2" style="color:whitesmoke">/</span> <strong
+                                style="color:whitesmoke">Search Result</strong></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <h2 class="section-heading"><strong>Search</strong></h2>
+            <p class="mb-5">{{ searchname}}</p>
+          </div>
+        </div>
+
+
+        <div class="row">
+             {% for car in cars %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="listing d-block  align-items-stretch">
+              <div class="listing-img h-100 mr-4">
+                <img src="{{  car.image.url }}" alt="Image" class="img-fluid">
+              </div>
+              <div class="listing-contents h-100">
+                <h3>{{ car.title}}</h3>
+                <div class="rent-price">
+                  <strong>${{ car.rent_price }}</strong><span class="mx-1">/</span>day
+                </div>
+                <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                  <div class="listing-feature pr-4">
+                    <span class="caption">Luggage:</span>
+                    <span class="number">{{ car.Bag }}</span>
+                  </div>
+                  <div class="listing-feature pr-4">
+                    <span class="caption">Doors:</span>
+                    <span class="number">{{ car.door_number }}</span>
+                  </div>
+                  <div class="listing-feature pr-4">
+                    <span class="caption">Passenger:</span>
+                    <span class="number">{{ car.passenger_amount }}</span>
+                  </div>
+                </div>
+                <div>
+                  <p>{{ car.description}}</p>
+                  <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+{% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

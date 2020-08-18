@@ -9,14 +9,12 @@
             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </div>
         </div>
-
-
         <div class="row">
              {% for car in cars %}
           <div class="col-md-6 col-lg-4 mb-4">
               <div class="listing d-block  align-items-stretch">
               <div class="listing-img h-100 mr-4">
-                <img src="uploads/{{  car.image }}" alt="Image" class="img-fluid">
+                <img src="uploads/{{ car.image }}" alt="Image" class="img-fluid">
               </div>
               <div class="listing-contents h-100">
                 <h3>{{ car.title}}</h3>
