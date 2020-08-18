@@ -9,7 +9,6 @@
 
 {% block slider %}
     <div class="hero inner-page" style="background-image: url('../static/images/01.jpg');">
-
         <div class="container">
             <div class="row align-items-end ">
                 <div class="col-lg-5">
@@ -28,5 +27,23 @@
 {% endblock %}
 
 {% block content %}
+    <!-- Filtering Menu -->
+    <div class="navbar navbar-light bg-light ">
+        <br><br><br>
+        <div class="container">
+            <br><br>
+            <div class="col-lg-8">
+                {% for Category in categories %}
+                    {% if Category.parent_id == None %}
+                        <button type="button" class="btn btn-outline-primary">{{ Category.title }}</button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Filtering Menu -->
+
     {% include 'listing.html' %}
 {% endblock %}
