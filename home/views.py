@@ -1,12 +1,13 @@
 from unicodedata import category
 
+from django.contrib.auth import logout, authenticate, login
 from django.core.checks import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from car.models import Car, Category
-from home.forms import SearchForm
+from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactMessage, ContactForm
 from home import views
 
@@ -33,6 +34,7 @@ def ListCar(request):
     cars = Car.objects.filter(category_id__in=cat_ids)
     context = {'setting': setting, 'page': 'Home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
     return render(request, 'ListCar.html', context)
+    # return HttpResponseRedirect('/listCar')
 
 
 def about(request):
@@ -90,3 +92,49 @@ def search(request):
     cars = Car.objects.all()
     context = {'setting': setting, 'page': 'home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
     return render(request, 'index.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+def login_view(request):
+    if request.method == 'POST':  # check post
+
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.Error(request, "Login Error .. Try Again ..")
+            return HttpResponseRedirect('/login')
+
+    category = Category.objects.all()
+    context = {'category': category, 'messages': [
+        {'danger': "Login Error .. Try Again ..", "tag": 'danger'}]}
+    return render(request, 'login.html', context)
+
+
+def signup_view(request):
+    if request.method == 'POST':  # check post
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+
+    form = SignUpForm()
+
+    category = Category.objects.all()
+    context = {'category': category,
+               'form': form,
+               }
+    return render(request, 'signup.html', context)
+
+# 'messages': [{'danger': "Login Error .. Try Again ..", "tag": 'danger'}]

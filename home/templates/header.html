@@ -2,187 +2,278 @@
 {% load static %}
 {% load myapptags %}
 <!DOCTYPE html>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<head>
+    <meta charset="utf-8"/>
+    <title>simple-account-dropdown</title>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" charset="utf-8"/>
 
-<header class="site-navbar site-navbar-target" role="banner">
-    <div class="container">
-        <div class="row align-items-center position-relative">
+    <style>
+        /* General Styles */
+        h4 {
+            color: #c5c5c5;
+            margin-top: 50px;
+        }
 
-            <div class="col-3">
-                <div class="site-logo">
-                    <a href="/index"><strong>CarRental</strong></a>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #fff;
+        }
+
+        ul#simple-account-dropdown-freebie {
+            display: table;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        ul#simple-account-dropdown-freebie > li {
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            background: #505d64;
+            padding: 10px 10px;
+        }
+
+        ul#simple-account-dropdown-freebie > li:last-child {
+            margin-right: 0;
+        }
+
+        ul#simple-account-dropdown-freebie > li > span {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#simple-account-dropdown > .account").click(function () {
+                $("#simple-account-dropdown > .dropdown").fadeToggle("fast", function () {
+                    if ($(this).css('display') == "none")
+                        $("#simple-account-dropdown > .account").removeClass("active");
+                    else
+                        $("#simple-account-dropdown > .account").addClass("active");
+                });
+            });
+        });
+    </script>
+
+
+    <!------------------------------------------------------------------------------------------------------------------>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <header class="site-navbar site-navbar-target" role="banner">
+        <div class="container">
+            <div class="row align-items-center position-relative">
+
+                <div class="col-3">
+                    <div class="site-logo">
+                        <a href="/index"><strong>CarRental</strong></a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-9  text-right">
+                <div class="col-9  text-right">
 
                 <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span
                         class="icon-menu h3 text-black"></span></a></span>
 
-                <nav class="navbar navbar-expand-md site-navigation text-right ml-auto d-none d-lg-block navbar-hover"
-                     role="navigation">
+                    <nav class="navbar navbar-expand-md site-navigation text-right ml-auto d-none d-lg-block navbar-hover"
+                         role="navigation">
 
-                    <div class="collapse navbar-collapse" id="navbarHover">
-                        <ul class="site-menu main-menu js-clone-nav navbar-nav ml-auto ">
-                            <li class="nav-item dropdown blackItem">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">
-                                    Categories
-                                </a>
-                                <ul class="dropdown-menu">
-                                    {% if categories %}
-                                        {% for Category in categories %}
-                                            {% if Category.parent_id == None %}
-                                                <li><a class="dropdown-item dropdown-toggle"
-                                                       href="ListCar?cat={{ Category.id }}">{{ Category.title }}</a>
-                                                    <ul class="dropdown-menu">
-                                                        {% for SubCategory in categories %}
-                                                            {% if SubCategory.parent_id == Category.id %}
-                                                                <li><a class="dropdown-item"
-                                                                       href="ListCar?cat={{ SubCategory.id }}">{{ SubCategory.title }}</a>
-                                                                </li>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </ul>
-                                                </li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                </ul>
-                            </li>
-                            <li class="active"><a href="/index" class="nav-link">Home</a></li>
-                            <li><a href="/ListCar" class="nav-link">Listing</a></li>
-                            <li><a href="/references" class="nav-link">References</a></li>
-                            <li><a href="/blog.html" class="nav-link">Blog</a></li>
-                            <li><a href="/about" class="nav-link">About</a></li>
-                            <li><a href="/contact" class="nav-link">Contact</a></li>
+                        <div class="collapse navbar-collapse" id="navbarHover">
+                            <ul class="site-menu main-menu js-clone-nav navbar-nav ml-auto ">
+                                <li class="nav-item dropdown blackItem">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        Categories
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        {% if categories %}
+                                            {% for Category in categories %}
+                                                {% if Category.parent_id == None %}
+                                                    <li><a class="dropdown-item dropdown-toggle"
+                                                           href="ListCar?cat={{ Category.id }}">{{ Category.title }}</a>
+                                                        <ul class="dropdown-menu">
+                                                            {% for SubCategory in categories %}
+                                                                {% if SubCategory.parent_id == Category.id %}
+                                                                    <li><a class="dropdown-item"
+                                                                           href="ListCar?cat={{ SubCategory.id }}">{{ SubCategory.title }}</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                <li class="active"><a href="/index" class="nav-link">Home</a></li>
+                                <li><a href="/ListCar" class="nav-link">Listing</a></li>
+                                <li><a href="/references" class="nav-link">References</a></li>
+                                <li><a href="/blog.html" class="nav-link">Blog</a></li>
+                                <li><a href="/about" class="nav-link">About</a></li>
+                                <li><a href="/contact" class="nav-link">Contact</a></li>
 
-                        </ul>
+                            </ul>
 
-                        <form id="searchForm" action="/search/" method="post">
-                            {% csrf_token %}
-                            <div class="d-flex justify-content-center h-100">
-                                <div class="searchbar">
-                                    <input id="Search" name="Search" class="search_input" type="text"
-                                           placeholder="Search...">
-                                    <a href="#" onclick="document.getElementById('searchForm').submit();"
-                                       class="search_icon"><i class="fas fa-search"></i></a>
+                            <form id="searchForm" action="/search/" method="post">
+                                {% csrf_token %}
+                                <div class="d-flex justify-content-center h-100">
+                                    <div class="searchbar">
+                                        <input id="Search" name="Search" class="search_input" type="text"
+                                               placeholder="Search...">
+                                        <a href="#" onclick="document.getElementById('searchForm').submit();"
+                                           class="search_icon"><i class="fas fa-search"></i></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                    <!-- Account Dropdown menu ------------------------------------------------------------------------>
+
+                    <ul id="simple-account-dropdown-freebie">
+                        <li>
+                            <div id="simple-account-dropdown">
+                                {% if user.id is not None %}
+                                <div class="account">
+                                    <img src="{% static 'images/avatar.png' %}" alt="Account"/>
+                                    <span>{{ user.username }}</span>
+                                    <img src="{% static 'images/arrow.png' %}" alt="Dropdown"/>
+
+                                    {% else %}
+                                    <a href="/login/" class="text-uppercase">Login</a> / <a href="/signup/" class="text-uppercase">Sign Up</a>
+                                 {% endif %}
+                            </div>
+                                <div class="dropdown" style="display: none">
+                                    <ul>
+                                         <li><a href="/logout/"><img src="{% static 'images/upload.png' %}" alt="Upload"/>
+                                            Logout</a></li>
+                                        <li><a href="#"><img src="{% static 'images/messages.png' %}" alt="Upload"/>
+                                            Messages</a></li>
+                                        <li><a href="#"><img src="{% static 'images/star.png' %}" alt="Upload"/>
+                                            Bookmarks</a></li>
+                                        <li><a href="#"><img src="{% static 'images/search.png' %}" alt="Upload"/>
+                                            Search</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                        </form>
+                        </li>
+                    </ul>
+                    <!--------------------- /Account ------------------------------------------------------------->
+                    <style>
 
-                    </div>
-                </nav>
-                <style>
+                        /* hover dropdown menus
+                        @media only screen and (max-width: 991px) {
+                            .navbar-hover .show > .dropdown-toggle::after{
+                                transform: rotate(-90deg);
+                            }
+                        }*/
+                        @media only screen and (min-width: 992px) {
+                            .navbar-hover .collapse ul li {
+                                position: relative;
+                            }
 
-                    /* hover dropdown menus
-                    @media only screen and (max-width: 991px) {
-                        .navbar-hover .show > .dropdown-toggle::after{
-                            transform: rotate(-90deg);
+                            .navbar-hover .collapse ul li:hover > ul {
+                                display: block
+                            }
+
+                            .navbar-hover .collapse ul ul {
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                min-width: 250px;
+                                display: none
+                            }
+
+                            .navbar-hover .collapse ul ul ul {
+                                position: absolute;
+                                top: 0;
+                                left: 100%;
+                                min-width: 250px;
+                                display: none
+                            }
+
+                            /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
                         }
-                    }*/
-                    @media only screen and (min-width: 992px) {
-                        .navbar-hover .collapse ul li {
-                            position: relative;
-                        }
+                    </style>
+                </div>
 
-                        .navbar-hover .collapse ul li:hover > ul {
-                            display: block
-                        }
 
-                        .navbar-hover .collapse ul ul {
-                            position: absolute;
-                            top: 100%;
-                            left: 0;
-                            min-width: 250px;
-                            display: none
-                        }
-
-                        .navbar-hover .collapse ul ul ul {
-                            position: absolute;
-                            top: 0;
-                            left: 100%;
-                            min-width: 250px;
-                            display: none
-                        }
-
-                        /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
-                    }
-                </style>
             </div>
-
-
         </div>
-    </div>
-    <style>
+        <style>
 
-        header.site-navbar.site-navbar-target {
-            height: 90px;
-            background: #007bffe0;
-            box-shadow: 0px 0px 8px 1px #000000;
-            position: fixed;
-        }
+            header.site-navbar.site-navbar-target {
+                height: 90px;
+                background: #007bffe0;
+                box-shadow: 0px 0px 8px 1px #000000;
+                position: fixed;
+            }
 
-        .site-logo a strong, .site-menu.main-menu.js-clone-nav.ml-auto > li > a {
-            color: #fff !important;
-        }
+            .site-logo a strong, .site-menu.main-menu.js-clone-nav.ml-auto > li > a {
+                color: #fff !important;
+            }
 
-        <!--
-        ---- Search bar css ---------- >
-        body, html {
+            <!--
+            ---- Search bar css ---------- >
+            body, html {
 
-        }
+            }
 
-        .searchbar {
-            margin-bottom: auto;
-            margin-top: auto;
-            height: 40px;
-            background-color: #F3F3F3;
-            border-radius: 40px;
-            padding: 10px;
-        }
+            .searchbar {
+                margin-bottom: auto;
+                margin-top: auto;
+                height: 40px;
+                background-color: #F3F3F3;
+                border-radius: 40px;
+                padding: 10px;
+            }
 
-        .search_input {
-            color: #3F3F3F;
-            border: 0;
-            outline: 0;
-            background: none;
-            width: 0;
-            caret-color: transparent;
-            line-height: 15px;
-            transition: width 0.4s linear;
-        }
+            .search_input {
+                color: #3F3F3F;
+                border: 0;
+                outline: 0;
+                background: none;
+                width: 0;
+                caret-color: transparent;
+                line-height: 15px;
+                transition: width 0.4s linear;
+            }
 
-        .searchbar:hover > .search_input {
-            padding: 0 0px;
-            width: 150px;
-            caret-color: #3F3F3F;
-            transition: width 0.4s linear;
-        }
+            .searchbar:hover > .search_input {
+                padding: 0 0px;
+                width: 150px;
+                caret-color: #3F3F3F;
+                transition: width 0.4s linear;
+            }
 
-        .searchbar:hover > .search_icon {
-            background: #F3F3F3;
-            color: #3F3F3F;
-        }
+            .searchbar:hover > .search_icon {
+                background: #F3F3F3;
+                color: #3F3F3F;
+            }
 
-        .search_icon {
-            height: 20px;
-            width: 20px;
-            float: right;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            color: #3F3F3F;
-            text-decoration: none;
-        }
-    </style>
-</header>
+            .search_icon {
+                height: 20px;
+                width: 20px;
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color: #3F3F3F;
+                text-decoration: none;
+            }
+        </style>
+    </header>
+</head>

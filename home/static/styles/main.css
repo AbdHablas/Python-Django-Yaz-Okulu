@@ -1,0 +1,111 @@
+/*
+ * @freebie: simple-account-dropdown
+ * @author: Francisco Neves
+ */
+
+a, a:visited, a:hover, a:active { text-decoration: none; color: inherit; }
+
+div#simple-account-dropdown
+{
+	position: relative;
+	font-size: 14px;
+	color: #fff;
+}
+	div#simple-account-dropdown > .account
+	{
+		text-align: center;
+		cursor: pointer;
+		padding: 5px 10px;
+		-webkit-transition: 0.1s ease-in;
+		-moz-transition: 0.1s ease-in;
+		-o-transition: 0.1s ease-in;
+		transition: 0.1s ease-in;
+	}
+
+	div#simple-account-dropdown > .account:hover
+	{
+		background: #404a52;
+	}
+
+	div#simple-account-dropdown > .account:active, div#simple-account-dropdown > .account.active
+	{
+		background: #374047;
+	}
+
+	div#simple-account-dropdown > .account > span
+	{
+		margin: 0 10px;
+	}
+
+	div#simple-account-dropdown > .account > img
+	{
+		vertical-align: middle;
+	}
+
+	div#simple-account-dropdown > .dropdown
+	{
+		position: absolute;
+		width: 190px;
+		top: 80px;
+		left: 50%;
+		margin-left: -95px;
+	}
+
+	div#simple-account-dropdown > .dropdown::before
+	{
+		content: '';
+		display: block;
+		position: absolute;
+		border: 10px solid #404a52;
+		border-left: 10px solid rgba(255, 255, 255, 0);
+		border-right: 10px solid rgba(255, 255, 255, 0);
+		border-top: 0px solid rgba(255, 255, 255, 0);
+		top: -10px;
+		left: 50%;
+		margin-left: -10px;
+	}
+
+	div#simple-account-dropdown > .dropdown > ul
+	{
+		display: block;
+		margin: 0; padding: 0;
+		list-style: none;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		overflow: hidden;
+		background: #404a52;
+	}
+
+	div#simple-account-dropdown > .dropdown > ul > li a
+	{
+		display: block;
+		padding: 10px 30px;
+		font-size: 13px;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	div#simple-account-dropdown > .dropdown > ul > li a:hover
+	{
+		margin: 0;
+		padding: 10px 30px;
+		background: #48535c;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	}
+
+	div#simple-account-dropdown > .dropdown > ul > li a > img
+	{
+		vertical-align: middle;
+		margin-right: 10px;
+	}
+
+	div#simple-account-dropdown > .dropdown > ul > li:first-child a
+	{
+		border-top: none;
+	}
+
+	div#simple-account-dropdown > .dropdown > ul > li:last-child a
+	{
+		border-bottom: none;
+	}
