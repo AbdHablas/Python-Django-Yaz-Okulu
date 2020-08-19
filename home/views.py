@@ -24,9 +24,9 @@ def ListCar(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Car.objects.all()[:1]
     categories = Category.objects.all()
-    cat_id=request.GET.get('cat', '')
-    sub_categories = Category.objects.extra(where=["parent_id='"+cat_id+"'"]).values_list('id', flat=True)
-    cat_ids=[]
+    cat_id = request.GET.get('cat', '')
+    sub_categories = Category.objects.extra(where=["parent_id='" + cat_id + "'"]).values_list('id', flat=True)
+    cat_ids = []
     for sub_category in sub_categories:
         cat_ids.append(sub_category)
     cat_ids.append(cat_id)

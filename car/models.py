@@ -1,9 +1,8 @@
-from audioop import reverse
-
 from django.contrib.auth.models import User
 from django.db import models
 # Create your models here.
 from django.forms import ModelForm
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
@@ -21,10 +20,13 @@ class Category(MPTTModel):
     description = models.CharField(max_length=255)
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=255, choices=STATUS)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, unique=True)
     parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
     def __str__(self):  # __str__ method elaborated later in
         full_path = [self.title]  # post.  use __unicode__ in place of
@@ -54,10 +56,13 @@ class Car(models.Model):
     rent_price = models.IntegerField()
     details = RichTextUploadingField(blank=True)
     status = models.CharField(max_length=255, choices=STATUS)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, unique=True)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('car_detail', kwargs={'slug': self.slug})
 
     class MPTTMeta:
         level_attr = 'mptt_level'
