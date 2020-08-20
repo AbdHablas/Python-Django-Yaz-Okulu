@@ -39,8 +39,8 @@ class Category(MPTTModel):
 
 class Car(models.Model):
     STATUS = (
-        ('True', 'True'),
-        ('False', 'False'),
+        ('Yes', 'True'),
+        ('No', 'False'),
     )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # many to one relationship with category

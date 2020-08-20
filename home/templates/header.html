@@ -8,42 +8,7 @@
 
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" charset="utf-8"/>
 
-    <style>
-        /* General Styles */
-        h4 {
-            color: #c5c5c5;
-            margin-top: 50px;
-        }
 
-        body {
-            margin: 0;
-            font-family: Arial;
-            background-color: #fff;
-        }
-
-        ul#simple-account-dropdown-freebie {
-            display: table;
-            list-style: none;
-            margin: 0 auto;
-            padding: 0;
-        }
-
-        ul#simple-account-dropdown-freebie > li {
-            float: left;
-            margin-right: 20px;
-            margin-bottom: 20px;
-            background: #505d64;
-            padding: 10px 10px;
-        }
-
-        ul#simple-account-dropdown-freebie > li:last-child {
-            margin-right: 0;
-        }
-
-        ul#simple-account-dropdown-freebie > li > span {
-            margin-bottom: 10px;
-        }
-    </style>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
     <script type="text/javascript">
@@ -86,7 +51,7 @@
                 <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span
                         class="icon-menu h3 text-black"></span></a></span>
 
-                    <nav class="navbar navbar-expand-md site-navigation text-right ml-auto d-none d-lg-block navbar-hover"
+                    <nav class="navbar navbar-expand-md site-navigation text-left ml-auto d-none d-lg-block navbar-hover"
                          role="navigation">
 
                         <div class="collapse navbar-collapse" id="navbarHover">
@@ -119,9 +84,9 @@
                                     </ul>
                                 </li>
                                 <li class="active"><a href="/index" class="nav-link">Home</a></li>
-                                <li><a href="/ListCar" class="nav-link">Listing</a></li>
+                                <li><a href="/ListCar" class="nav-link">Cars</a></li>
                                 <li><a href="/references" class="nav-link">References</a></li>
-                                <li><a href="/blog.html" class="nav-link">Blog</a></li>
+                                <!--<li><a href="/blog.html" class="nav-link">Blog</a></li>-->
                                 <li><a href="/about" class="nav-link">About</a></li>
                                 <li><a href="/contact" class="nav-link">Contact</a></li>
                                 {% if user.id is not None %}
@@ -173,7 +138,7 @@
                         </div>
                     </nav>
 
-                    <!-- Account Dropdown menu ------------------------------------------------------------------------>
+
 
                     <!--------------------- /Account ------------------------------------------------------------->
                     <style>
@@ -211,6 +176,45 @@
 
                             /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
                         }
+
+
+     <style>
+        /* General Styles */
+        h4 {
+            color: #c5c5c5;
+            margin-top: 50px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #fff;
+        }
+
+        ul#simple-account-dropdown-freebie {
+            display: table;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        ul#simple-account-dropdown-freebie > li {
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            background: #505d64;
+            padding: 10px 10px;
+        }
+
+        ul#simple-account-dropdown-freebie > li:last-child {
+            margin-right: 0;
+        }
+
+        ul#simple-account-dropdown-freebie > li > span {
+            margin-bottom: 10px;
+        }
+    </style>
+
                     </style>
                 </div>
 
