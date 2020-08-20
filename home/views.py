@@ -21,22 +21,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def ListCar(request):
-    setting = Setting.objects.get(pk=1)
-    sliderdata = Car.objects.all()[:1]
-    categories = Category.objects.all()
-    cat_id = request.GET.get('cat', '')
-    sub_categories = Category.objects.extra(where=["parent_id='" + cat_id + "'"]).values_list('id', flat=True)
-    cat_ids = []
-    for sub_category in sub_categories:
-        cat_ids.append(sub_category)
-    cat_ids.append(cat_id)
-    cars = Car.objects.filter(category_id__in=cat_ids)
-    context = {'setting': setting, 'page': 'Home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
-    return render(request, 'ListCar.html', context)
-    # return HttpResponseRedirect('/listCar')
-
-
 def about(request):
     setting = Setting.objects.get(pk=1)
     categories = Category.objects.all()
@@ -100,8 +84,8 @@ def logout_view(request):
 
 
 def login_view(request):
+    category = Category.objects.all()
     if request.method == 'POST':  # check post
-
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
@@ -109,32 +93,55 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            messages.Error(request, "Login Error .. Try Again ..")
-            return HttpResponseRedirect('/login')
-
-    category = Category.objects.all()
-    context = {'category': category, 'messages': [
-        {'danger': "Login Error .. Try Again ..", "tag": 'danger'}]}
+            context = {'category': category, 'messages': [
+                {'danger': "Login Error .. Try Again ..", "tag": 'danger'}]}
+            return render(request, 'login.html', context)
+    context = {'category': category}
     return render(request, 'login.html', context)
 
 
 def signup_view(request):
+    category = Category.objects.all()
+    context = {'category': category}
     if request.method == 'POST':  # check post
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return HttpResponseRedirect('/')
-
-    form = SignUpForm()
-
-    category = Category.objects.all()
-    context = {'category': category,
-               'form': form,
-               }
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+            return render(request, 'login.html', context)
+        else:
+            context = {'category': category, 'messages': [
+                {'danger': str(form.errors), "tag": 'danger'}]}
     return render(request, 'signup.html', context)
 
-# 'messages': [{'danger': "Login Error .. Try Again ..", "tag": 'danger'}]
+
+def car_details(request):
+    categories = Category.objects.all()
+    car = Car.objects.filter(id__in=[request.GET.get('car_id', '')])[0]
+    context = {'category': category, 'car': car}
+    return render(request, 'car_details.html', context)
+
+
+def ListCar(request):
+    setting = Setting.objects.get(pk=1)
+    sliderdata = Car.objects.all()[:1]
+    cars = Car.objects.all()
+    categories = Category.objects.all()
+    cat_id = request.GET.get('cat', '')
+    if 'cat' not in request.GET:
+        context = {'setting': setting, 'page': 'Home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
+        return render(request, 'ListCar.html', context)
+    sub_categories = Category.objects.extra(where=["parent_id='" + cat_id + "'"]).values_list('id', flat=True)
+    cat_ids = []
+    for sub_category in sub_categories:
+        cat_ids.append(sub_category)
+    cat_ids.append(cat_id)
+    cars = Car.objects.filter(category_id__in=cat_ids)
+    context = {'setting': setting, 'page': 'Home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
+    return render(request, 'ListCar.html', context)
+    # return HttpResponseRedirect('/listCar')

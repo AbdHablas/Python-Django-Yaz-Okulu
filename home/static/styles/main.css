@@ -21,15 +21,17 @@ div#simple-account-dropdown
 		-o-transition: 0.1s ease-in;
 		transition: 0.1s ease-in;
 	}
-
+a.btn.btn-primary.btn-sm {
+    color: #fff!important;
+}
 	div#simple-account-dropdown > .account:hover
 	{
-		background: #404a52;
+		/*background: #404a52;*/
 	}
 
 	div#simple-account-dropdown > .account:active, div#simple-account-dropdown > .account.active
 	{
-		background: #374047;
+		/*background: #374047;*/
 	}
 
 	div#simple-account-dropdown > .account > span

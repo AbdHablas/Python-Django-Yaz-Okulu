@@ -72,7 +72,7 @@
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <header class="site-navbar site-navbar-target" role="banner">
-        <div class="container">
+        <div class="container" style="max-width: 1500px;">
             <div class="row align-items-center position-relative">
 
                 <div class="col-3">
@@ -124,7 +124,39 @@
                                 <li><a href="/blog.html" class="nav-link">Blog</a></li>
                                 <li><a href="/about" class="nav-link">About</a></li>
                                 <li><a href="/contact" class="nav-link">Contact</a></li>
-
+                                {% if user.id is not None %}
+                                    <li>
+                                        <div id="simple-account-dropdown">
+                                            <div class="account">
+                                                <img src="{% static 'images/avatar.png' %}" alt="Account"/>
+                                                <span>{{ user.username }}</span>
+                                                <img src="{% static 'images/arrow.png' %}" alt="Dropdown"/>
+                                            </div>
+                                            <div class="dropdown" style="display: none">
+                                                <ul>
+                                                    <li><a href="/logout/"><img
+                                                            src="{% static 'images/upload.png' %}"
+                                                            alt="Upload"/>
+                                                        Logout</a></li>
+                                                    <li><a href="#"><img src="{% static 'images/messages.png' %}"
+                                                                         alt="Upload"/>
+                                                        Messages</a></li>
+                                                    <li><a href="#"><img src="{% static 'images/star.png' %}"
+                                                                         alt="Upload"/>
+                                                        Bookmarks</a></li>
+                                                    <li><a href="#"><img src="{% static 'images/search.png' %}"
+                                                                         alt="Upload"/>
+                                                        Search</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="/login" class="nav-link">Login</a> /
+                                        <a href="/signup" class="nav-link">Sing Up</a>
+                                    </li>
+                                {% endif %}
                             </ul>
 
                             <form id="searchForm" action="/search/" method="post">
@@ -140,36 +172,9 @@
                             </form>
                         </div>
                     </nav>
+
                     <!-- Account Dropdown menu ------------------------------------------------------------------------>
 
-                    <ul id="simple-account-dropdown-freebie">
-                        <li>
-                            <div id="simple-account-dropdown">
-                                {% if user.id is not None %}
-                                <div class="account">
-                                    <img src="{% static 'images/avatar.png' %}" alt="Account"/>
-                                    <span>{{ user.username }}</span>
-                                    <img src="{% static 'images/arrow.png' %}" alt="Dropdown"/>
-
-                                    {% else %}
-                                    <a href="/login/" class="text-uppercase">Login</a> / <a href="/signup/" class="text-uppercase">Sign Up</a>
-                                 {% endif %}
-                            </div>
-                                <div class="dropdown" style="display: none">
-                                    <ul>
-                                         <li><a href="/logout/"><img src="{% static 'images/upload.png' %}" alt="Upload"/>
-                                            Logout</a></li>
-                                        <li><a href="#"><img src="{% static 'images/messages.png' %}" alt="Upload"/>
-                                            Messages</a></li>
-                                        <li><a href="#"><img src="{% static 'images/star.png' %}" alt="Upload"/>
-                                            Bookmarks</a></li>
-                                        <li><a href="#"><img src="{% static 'images/search.png' %}" alt="Upload"/>
-                                            Search</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
                     <!--------------------- /Account ------------------------------------------------------------->
                     <style>
 
