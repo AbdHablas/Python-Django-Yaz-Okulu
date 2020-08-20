@@ -4,11 +4,16 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8"/>
-    <title>simple-account-dropdown</title>
-
+    <!------------------------------------------------------------------------------------------------------------------>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" charset="utf-8"/>
-
-
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
     <script type="text/javascript">
@@ -24,25 +29,17 @@
         });
     </script>
 
+</head>
 
-    <!------------------------------------------------------------------------------------------------------------------>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <header class="site-navbar site-navbar-target" role="banner">
-        <div class="container" style="max-width: 1500px;">
+        <div class="container" style="max-width: 1350px;">
             <div class="row align-items-center position-relative">
 
                 <div class="col-3">
                     <div class="site-logo">
-                        <a href="/index"><strong>CarRental</strong></a>
+                        <a class="active" href="/index"><strong>CarRental</strong></a>
                     </div>
                 </div>
 
@@ -139,8 +136,6 @@
                     </nav>
 
 
-
-                    <!--------------------- /Account ------------------------------------------------------------->
                     <style>
 
                         /* hover dropdown menus
@@ -176,45 +171,6 @@
 
                             /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
                         }
-
-
-     <style>
-        /* General Styles */
-        h4 {
-            color: #c5c5c5;
-            margin-top: 50px;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial;
-            background-color: #fff;
-        }
-
-        ul#simple-account-dropdown-freebie {
-            display: table;
-            list-style: none;
-            margin: 0 auto;
-            padding: 0;
-        }
-
-        ul#simple-account-dropdown-freebie > li {
-            float: left;
-            margin-right: 20px;
-            margin-bottom: 20px;
-            background: #505d64;
-            padding: 10px 10px;
-        }
-
-        ul#simple-account-dropdown-freebie > li:last-child {
-            margin-right: 0;
-        }
-
-        ul#simple-account-dropdown-freebie > li > span {
-            margin-bottom: 10px;
-        }
-    </style>
-
                     </style>
                 </div>
 
@@ -284,5 +240,40 @@
                 text-decoration: none;
             }
         </style>
+     <style>
+        /* General Styles */
+        h4 {
+            color: #c5c5c5;
+            margin-top: 50px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #fff;
+        }
+
+        ul#simple-account-dropdown-freebie {
+            display: table;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        ul#simple-account-dropdown-freebie > li {
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            background: #505d64;
+            padding: 10px 10px;
+        }
+
+        ul#simple-account-dropdown-freebie > li:last-child {
+            margin-right: 0;
+        }
+
+        ul#simple-account-dropdown-freebie > li > span {
+            margin-bottom: 10px;
+        }
+    </style>
     </header>
-</head>

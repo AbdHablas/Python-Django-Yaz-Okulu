@@ -9,14 +9,7 @@
 
 
 {% block head %}
-    <link rel='shourtcut icon ' type='/image/x-icon' href='{{ setting.icon.url }}'/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
-          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 {% endblock %}
 
 
@@ -56,7 +49,7 @@
                 {% for car in cars %}
                     <a href="/car_details?car_id={{ car.id }}">
                         <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="listing d-block  align-items-stretch">
+                            <div class="service-1 dark listing d-block  align-items-stretch">
                                 <div class="listing-img h-100 mr-4">
                                     <img src="{{ car.image.url }}" alt="Image" class="img-fluid">
                                 </div>
