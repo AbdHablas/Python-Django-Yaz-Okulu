@@ -58,24 +58,29 @@ def contact(request):
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()  # save data to table
             context = {'setting': setting, 'page': 'contact', 'categories': categories, 'messages': [
-                {'success': "Your message has ben sent. Thank you for your message.", "tag": 'success'}]}
+                {'message': "Your message has ben sent. Thank you for your message.", "tag": 'success'}]}
+            return render(request, 'contact.html', context)
+
+        else:
+            context = {'setting': setting, 'page': 'contact', 'categories': categories, 'messages': [
+                {'message': str(form.errors), "tag": 'danger'}]}
             return render(request, 'contact.html', context)
     context = {'setting': setting, 'page': 'contact', 'categories': categories}
     return render(request, 'contact.html', context)
 
 
 def search(request):
-    if request.method == 'POST':  # check post
-        form = SearchForm(request.POST)
-        query = request.POST['Search']
-        cars = Car.objects.all()
-        cars = Car.objects.filter(title__icontains=query)  # SELECT * FROM product WHERE title LIKE '%query%'
-        context = {'cars': cars, 'searchname': query}
-        return render(request, 'search_car.html', context)
     setting = Setting.objects.get(pk=1)
     sliderdata = Car.objects.all()[:1]
     categories = Category.objects.all()
     cars = Car.objects.all()
+    if request.method == 'POST':  # check post
+        form = SearchForm(request.POST)
+        query = request.POST['Search']
+        cars = Car.objects.filter(title__icontains=query)  # SELECT * FROM product WHERE title LIKE '%query%'
+        context = {'cars': cars, 'searchname': query}
+        context = {'setting': setting, 'page': 'home','searchname': query, 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
+        return render(request, 'search_car.html', context)
     context = {'setting': setting, 'page': 'home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
     return render(request, 'index.html', context)
 
@@ -86,7 +91,7 @@ def logout_view(request):
 
 
 def login_view(request):
-    category = Category.objects.all()
+    categories = Category.objects.all()
     if request.method == 'POST':  # check post
         username = request.POST['username']
         password = request.POST['password']
@@ -95,16 +100,16 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            context = {'category': category, 'messages': [
+            context = {'categories': categories, 'messages': [
                 {'danger': "Login Error .. Try Again ..", "tag": 'danger'}]}
             return render(request, 'login.html', context)
-    context = {'category': category}
+    context = {'categories': categories}
     return render(request, 'login.html', context)
 
 
 def signup_view(request):
-    category = Category.objects.all()
-    context = {'category': category}
+    categories = Category.objects.all()
+    context = {'categories': categories}
     if request.method == 'POST':  # check post
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -117,7 +122,7 @@ def signup_view(request):
                 return HttpResponseRedirect('/')
             return render(request, 'login.html', context)
         else:
-            context = {'category': category, 'messages': [
+            context = {'categories': categories, 'messages': [
                 {'danger': str(form.errors), "tag": 'danger'}]}
     return render(request, 'signup.html', context)
 
@@ -125,7 +130,7 @@ def signup_view(request):
 def car_details(request):
     categories = Category.objects.all()
     car = Car.objects.filter(id__in=[request.GET.get('car_id', '')])[0]
-    context = {'category': category, 'car': car}
+    context = {'categories': categories, 'car': car}
     return render(request, 'car_details.html', context)
 
 
@@ -155,18 +160,19 @@ def rent_car(request):
     car = Car.objects.filter(id__in=[car_id])[0]
     OlodRentCar = None
     OlodRentCar = Rent.objects.filter(car_id__in=[car_id]).filter(finished__in=[0])
-    context = {'category': category, 'car': car}
+    context = {'categories': categories, 'car': car}
     if request.method == 'POST':  # check post
         if request.user.is_authenticated:
             if OlodRentCar:
-                context = {'category': category, 'car': car, 'message':
-                {'message': 'this Car is pocked', "tag": 'danger'}}
+                context = {'categories': categories, 'car': car, 'message':
+                    {'message': 'this Car is pocked', "tag": 'danger'}}
                 return render(request, 'car_details.html', context)
 
             start_date = request.POST['start_date']
             end_date = request.POST['end_date']
             user_id = request.user.id
-            data= {'start_date':start_date, 'end_date':end_date,'user_id':user_id,'car_id':car_id,'approved':0,'finish':0,'canceled':0,'paid':0,'total_price':car.rent_price,'rate':0}
+            data = {'start_date': start_date, 'end_date': end_date, 'user_id': user_id, 'car_id': car_id, 'approved': 0,
+                    'finish': 0, 'canceled': 0, 'paid': 0, 'total_price': car.rent_price, 'rate': 0}
             form = RentCarForm(data)
             if form.is_valid():
                 data = Rent()
@@ -181,11 +187,11 @@ def rent_car(request):
                 data.total_price = car.rent_price
                 data.rate = 0
                 data.save()  # save data to table
-                context = {'category': category, 'car': car, 'message':
-                     {'message': "Reservation Done.", "tag": 'success'}}
+                context = {'categories': categories, 'car': car, 'message':
+                    {'message': "Reservation Done.", "tag": 'success'}}
             else:
-                context = {'category': category, 'car': car, 'message':
-                    {'message': form.errors , "tag": 'danger'}}
+                context = {'categories': categories, 'car': car, 'message':
+                    {'message': form.errors, "tag": 'danger'}}
         else:
             return HttpResponseRedirect('/login')
     return render(request, 'car_details.html', context)

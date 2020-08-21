@@ -52,11 +52,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 mb-5">
-                    <form action="#" method="post">
+                    <form action="/contact" method="post">
                         {% if messages %}
                             {% for message in messages %}
                                 <div class="alert alert-{{ message.tag }}" role="alert">
-                                    {{ message.success }}
+                                    {{ message.message }}
                                 </div>
                             {% endfor %}
                         {% endif %}
@@ -88,7 +88,6 @@
                                        value="Send Message">
 
                             </div>
-                            {{ form.as_p }}
                         </div>
 
                     </form>
@@ -109,11 +108,10 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <iframe src="https://www.google.com/maps/place/Karab%C3%BCk+University/@41.2106686,32.6533132,17z/data=!3m1!4b1!4m5!3m4!1s0x408354ac4492953f:0xab3b48ed0392a743!8m2!3d41.2106646!4d32.6555019?hl=en-GB"
-                            width="100%" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <div class="col-lg-12 mb-5">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48027.36941778622!2d32.685681475299795!3d41.206282820790264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x408354ac4492953f%3A0xab3b48ed0392a743!2z2KzYp9mF2LnYqSDZg9in2LHYp9io2YjZgw!5e0!3m2!1sar!2str!4v1598052291055!5m2!1sar!2str"
+                            width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
                 </div>
             </div>
         </div>

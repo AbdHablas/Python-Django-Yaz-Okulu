@@ -17,91 +17,92 @@
 {% block content %}
 
     <div class="site-section bg-light">
-    <div class="container">
-        <div class="row">
-            <div class=" container col-lg-9 mt-5 ">
-                <h2 class="section-heading"><strong>Cars Details</strong></h2>
-                <p class="mb-5"><strong>{{ car.title }} :</strong> Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit.</p>
+        <div class="container">
+            <div class="row">
+                <div class=" container col-lg-9 mt-5 ">
+                    <h2 class="section-heading"><strong>Cars Details</strong></h2>
+                    <p class="mb-5"><strong>{{ car.title }} :</strong> Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit.</p>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
 
-            <div class=" container col-md-9 col-lg-8 mb-4">
-                <div class="service-1 dark listing d-block  align-items-stretch">
-                    <div class="listing-img h-100 mr-4">
-                        <img src="uploads/{{ car.image }}" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="listing-contents h-100">
-                        <h3>{{ car.title }}</h3>
-                        <div class="rent-price mb-2">
-                            <strong>${{ car.rent_price }}</strong><span class="mx-1">/</span>day
+                <div class=" container col-md-9 col-lg-8 mb-4">
+                    <div class="service-1 dark listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="uploads/{{ car.image }}" alt="Image" class="img-fluid">
                         </div>
-                        <div class="d-block d-md-flex mb-3 border-bottom pb-3">
-                            <div class="listing-feature pr-4 ">
-                                <span class="caption">Luggage:</span>
-                                <span class="number">{{ car.Bag }}</span>
+                        <div class="listing-contents h-100">
+                            <h3>{{ car.title }}</h3>
+                            <div class="rent-price mb-2">
+                                <strong>${{ car.rent_price }}</strong><span class="mx-1">/</span>day
                             </div>
-                            <div class="listing-feature pr-4">
-                                <span class="caption">Doors:</span>
-                                <span class="number">{{ car.door_number }}</span>
-                            </div>
-                            <div class="listing-feature pr-4">
-                                <span class="caption">Passenger:</span>
-                                <span class="number">{{ car.passenger_amount }}</span>
-                            </div>
-
-                        </div>
-                        <div class="d-block d-md-flex mb-3 border-bottom pb-3">
-                            <div class="listing-feature pr-4">
-                                <span class="caption">Transmission Type:</span>
-                                <span class="number">{{ car.transmission_type }}</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p>{{ car.description }}</p>
-                            <p>{{ car.details }}</p>
-                        </div>
-                        <div>
-
-                            {% if message %}
-                                <div class="alert alert-{{ message.tag }}" role="alert">
-                                    {{ message.message }}
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4 ">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">{{ car.Bag }}</span>
                                 </div>
-                            {% endif %}
-                            {% if message.tag != 'success' %}
-                                <form method="post" action="/rent_car?car_id={{ car.id }}" class="trip-form">
-                                    {% csrf_token %}
-                                    <div class="row align-items-center">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">{{ car.door_number }}</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">{{ car.passenger_amount }}</span>
+                                </div>
 
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Transmission Type:</span>
+                                    <span class="number">{{ car.transmission_type }}</span>
+                                </div>
+                            </div>
 
-                                        <div class="mb-3 mb-md-0 col-md-4">
-                                            <div class="form-control-wrap">
-                                                <strong><label style="color: #007bff" for="cf-3">Pick Up :</label></strong>
-                                                <input type="datetime-local" id="cf-3" placeholder="Pick up"
-                                                       name="start_date"
-                                                       class="form-control datepicker px-3">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 mb-md-0 col-md-4">
-                                            <div class="form-control-wrap">
-                                                <strong><label style="color: #007bff" for="cf-3">Drop off :</label></strong>
-                                                <input  type="datetime-local" id="cf-3" placeholder="Drop off"
-                                                        name="end_date"
-                                                        class="form-control datepicker px-3">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 mb-md-0 col-md-4">
-                                            <input style="font-weight: bold" type="submit" value="Rent Now" class="btn btn-primary btn-block py-4 te">
-                                        </div>
+                            <div>
+                                <p>{{ car.description }}</p>
+                                <p>{{ car.details }}</p>
+                            </div>
+                            <div>
+
+                                {% if message %}
+                                    <div class="alert alert-{{ message.tag }}" role="alert">
+                                        {{ message.message }}
                                     </div>
+                                {% endif %}
+                                {% if message.tag != 'success' %}
+                                    <form method="post" action="/rent_car?car_id={{ car.id }}" class="trip-form">
+                                        {% csrf_token %}
+                                        <div class="row align-items-center">
 
-                                </form>
-                            {% endif %}
+                                            <div class="mb-3 mb-md-0 col-md-4">
+                                                <div class="form-control-wrap">
+                                                    <strong><label style="color: #007bff" for="cf-2">Pick Up
+                                                        :</label></strong>
+                                                    <input type="datetime-local" id="cf-2" name="start_date"
+                                                           class="form-control px-3">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 mb-md-0 col-md-4">
+                                                <div class="form-control-wrap">
+                                                    <strong><label style="color: #007bff" for="cf-3">Drop off
+                                                        :</label></strong>
+                                                    <input type="datetime-local" id="cf-3" name="end_date"
+                                                           class="form-control px-3">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 mb-md-0 col-md-4">
+                                                <input style="font-weight: bold" type="submit" value="Rent Now"
+                                                       class="btn btn-primary btn-block py-4 te">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                {% endif %}
+
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
