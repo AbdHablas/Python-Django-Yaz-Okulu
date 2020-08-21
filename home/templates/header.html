@@ -6,8 +6,6 @@
     <meta charset="utf-8"/>
     <!------------------------------------------------------------------------------------------------------------------>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -15,7 +13,9 @@
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" charset="utf-8"/>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="{% static  'js/jquery-3.3.1.min.js' %}"></script>
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#simple-account-dropdown > .account").click(function () {
@@ -39,9 +39,10 @@
 
                 <div class="col-3">
                     <div class="site-logo">
-                        <a class="active" href="/index"><strong>CarRental</strong></a>
+                        <a href="/index"><strong id="logo_span">CarRental</strong></a>
                     </div>
                 </div>
+
 
                 <div class="col-9  text-right">
 
@@ -178,7 +179,10 @@
             </div>
         </div>
         <style>
-
+#logo_span{
+        font-size: 1.7rem!important;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"!important;
+}
             header.site-navbar.site-navbar-target {
                 height: 90px;
                 background: #007bffe0;
@@ -249,7 +253,6 @@
 
         body {
             margin: 0;
-            font-family: Arial;
             background-color: #fff;
         }
 

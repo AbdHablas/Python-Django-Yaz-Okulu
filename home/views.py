@@ -16,6 +16,7 @@ from rent.models import Rent
 def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Car.objects.all()[:1]
+
     categories = Category.objects.all()
     cars = Car.objects.all()
     context = {'setting': setting, 'page': 'home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
@@ -181,7 +182,7 @@ def rent_car(request):
                 data.rate = 0
                 data.save()  # save data to table
                 context = {'category': category, 'car': car, 'message':
-                     {'message': "reservation done.", "tag": 'success'}}
+                     {'message': "Reservation Done.", "tag": 'success'}}
             else:
                 context = {'category': category, 'car': car, 'message':
                     {'message': form.errors , "tag": 'danger'}}

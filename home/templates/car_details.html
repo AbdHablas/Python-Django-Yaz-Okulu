@@ -61,10 +61,10 @@
 
                         <div>
                             <p>{{ car.description }}</p>
-
+                            <p>{{ car.details }}</p>
                         </div>
                         <div>
-                            <p>{{ car.details }}</p>
+
                             {% if message %}
                                 <div class="alert alert-{{ message.tag }}" role="alert">
                                     {{ message.message }}
@@ -76,25 +76,24 @@
                                     <div class="row align-items-center">
 
 
-                                        <div class="mb-3 mb-md-0 col-md-3">
+                                        <div class="mb-3 mb-md-0 col-md-4">
                                             <div class="form-control-wrap">
-                                                <input type="text" id="cf-3" placeholder="Pick up"
+                                                <strong><label style="color: #007bff" for="cf-3">Pick Up :</label></strong>
+                                                <input type="datetime-local" id="cf-3" placeholder="Pick up"
                                                        name="start_date"
                                                        class="form-control datepicker px-3">
-                                                <span class="icon icon-date_range"></span>
-
                                             </div>
                                         </div>
-                                        <div class="mb-3 mb-md-0 col-md-3">
+                                        <div class="mb-3 mb-md-0 col-md-4">
                                             <div class="form-control-wrap">
-                                                <input type="text" id="cf-4" placeholder="Drop off"
-                                                       name="end_date"
-                                                       class="form-control datepicker px-3">
-                                                <span class="icon icon-date_range"></span>
+                                                <strong><label style="color: #007bff" for="cf-3">Drop off :</label></strong>
+                                                <input  type="datetime-local" id="cf-3" placeholder="Drop off"
+                                                        name="end_date"
+                                                        class="form-control datepicker px-3">
                                             </div>
                                         </div>
-                                        <div class="mb-3 mb-md-0 col-md-3">
-                                            <input type="submit" value="Rent Now" class="btn btn-primary btn-block">
+                                        <div class="mb-3 mb-md-0 col-md-4">
+                                            <input style="font-weight: bold" type="submit" value="Rent Now" class="btn btn-primary btn-block py-4 te">
                                         </div>
                                     </div>
 
@@ -105,7 +104,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

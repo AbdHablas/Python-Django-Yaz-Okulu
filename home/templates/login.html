@@ -8,7 +8,7 @@
 
 
 {% block head %}
-    <title>Login</title><br><br>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -39,8 +39,8 @@
 
 {% block content %}
 
-    <div class="container-login100">
-        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+    <div class="container-login100 ">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55 mt-5">
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tag }}" role="alert">

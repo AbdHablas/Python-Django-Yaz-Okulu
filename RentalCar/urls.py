@@ -20,6 +20,7 @@ from django.urls import path, include
 
 import home
 from home import views
+from rent.views import admin_send_pdf_rent_detail_to_email
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -36,6 +37,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout_view'),
     path('login/', views.login_view, name='login_view'),
     path('signup/', views.signup_view, name='signup_views'),
+    path('admin/rent/<int:pk>/send-pdf/', admin_send_pdf_rent_detail_to_email, name='send_pdf_to_email'),
 
 ]
 if settings.DEBUG:

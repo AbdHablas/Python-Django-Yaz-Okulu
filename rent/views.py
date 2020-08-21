@@ -115,3 +115,5 @@ def admin_send_pdf_rent_detail_to_email(request, pk):
         send_pdf_to_email.delay(pk)
         return HttpResponse(f'<i>Email has been sent successfully to {rent.user.get_full_name()}!</i>')
     return HttpResponseBadRequest('<i>Oops! The rent is not approved yet or it has already been paid.</i>')
+
+
