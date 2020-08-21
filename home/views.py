@@ -1,5 +1,5 @@
 from unicodedata import category
-
+from django import forms
 from django.contrib.auth import logout, authenticate, login
 from django.core.checks import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,6 +10,7 @@ from car.models import Car, Category
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactMessage, ContactForm
 from home import views
+from rent.models import Rent
 
 
 def index(request):
@@ -145,3 +146,50 @@ def ListCar(request):
     context = {'setting': setting, 'page': 'Home', 'sliderdata': sliderdata, 'categories': categories, 'cars': cars}
     return render(request, 'ListCar.html', context)
     # return HttpResponseRedirect('/listCar')
+
+
+def rent_car(request):
+    categories = Category.objects.all()
+    car_id = request.GET.get('car_id', '')
+    car = Car.objects.filter(id__in=[car_id])[0]
+    OlodRentCar = None
+    OlodRentCar = Rent.objects.filter(car_id__in=[car_id]).filter(finished__in=[0])
+    context = {'category': category, 'car': car}
+    if request.method == 'POST':  # check post
+        if request.user.is_authenticated:
+            if OlodRentCar:
+                context = {'category': category, 'car': car, 'message':
+                {'message': 'this Car is pocked', "tag": 'danger'}}
+                return render(request, 'car_details.html', context)
+
+            start_date = request.POST['start_date']
+            end_date = request.POST['end_date']
+            user_id = request.user.id
+            data= {'start_date':start_date, 'end_date':end_date,'user_id':user_id,'car_id':car_id,'approved':0,'finish':0,'canceled':0,'paid':0,'total_price':car.rent_price,'rate':0}
+            form = RentCarForm(data)
+            if form.is_valid():
+                data = Rent()
+                data.start_date = start_date
+                data.end_date = end_date
+                data.user_id = user_id
+                data.car_id = car_id
+                data.approved = 0
+                data.finish = 0
+                data.canceled = 0
+                data.paid = 0
+                data.total_price = car.rent_price
+                data.rate = 0
+                data.save()  # save data to table
+                context = {'category': category, 'car': car, 'message':
+                     {'message': "reservation done.", "tag": 'success'}}
+            else:
+                context = {'category': category, 'car': car, 'message':
+                    {'message': form.errors , "tag": 'danger'}}
+        else:
+            return HttpResponseRedirect('/login')
+    return render(request, 'car_details.html', context)
+
+
+class RentCarForm(forms.Form):
+    start_date = forms.DateTimeField()
+    end_date = forms.DateTimeField()

@@ -18,6 +18,23 @@ from .models import Car, Rent
 from .serializers import RentSerializer
 
 
+class CheckCouponView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        code = loads(request.body.decode('utf-8')).get('code')
+        try:
+            coupon = Coupon.objects.get(code=code)
+            if coupon:
+                coupon_expired_date = Coupon.objects.get(code=code).expired
+                now = timezone.now()
+                if now > coupon_expired_date:
+                    return Response({'status': 'expired'})
+                return Response({'status': 'valid', 'discount': coupon.discount})
+        except Coupon.DoesNotExist:
+            return Response({'status': 'invalid'})
+
+
 class CreateRentView(CreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = RentSerializer
@@ -70,26 +87,6 @@ class CancelRentView(APIView):
         return Response({'canceled': True})
 
 
-
-
-    def post(self, request, pk):
-        try:
-            stripe_id = loads(request.body.decode('utf-8')).get('stripe_id')
-            total_price = loads(request.body.decode('utf-8')).get('total_price')
-            stripe.Charge.create(amount=int(total_price), currency='USD',
-                                 description='Payment from Rent-a-car web site.', card=stripe_id)
-            rent = Rent.objects.get(pk=pk)
-            rent.paid = True
-            rent.save()
-            messages.info(self.request,
-                          format_html('{} paid the Rent <a href="{}">{}</a>',
-                                      rent.user.get_full_name(),
-                                      f'http://localhost:8000/admin/rent/rent/{rent.pk}',
-                                      f'#{rent.pk}'))
-            send_rent_status_to_email.delay(pk, status='paid')
-            return Response()
-        except Exception:
-            return Response(status=HTTP_400_BAD_REQUEST)
 
 
 class RateCarView(APIView):
