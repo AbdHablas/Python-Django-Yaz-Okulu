@@ -19,9 +19,3 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'last_name')
 
 
-class UserProfileForm(ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ['phone', 'address', 'city', 'country', 'avatar']
-
-

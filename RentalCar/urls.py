@@ -22,6 +22,11 @@ from home import views
 from rent.views import admin_send_pdf_rent_detail_to_email
 
 urlpatterns = [
+    path('logout/', UserViews.logout_view, name='logout_view'),
+    path('login/', UserViews.login_view, name='login_view'),
+    path('signup/', UserViews.signup_view, name='signup_views'),
+    path('signup/', UserViews.signup_view, name='user_password'),
+
     path('', include('home.urls')),
     path('home/', include('home.urls')),
     path('car/', include('car.urls')),
@@ -34,9 +39,6 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('search/', views.search, name='search.urls'),
     path('category/<int:id>/<slug:slug>', views.ListCar, name='ListCar'),
-    path('logout/', UserViews.logout_view, name='logout_view'),
-    path('login/', UserViews.login_view, name='login_view'),
-    path('signup/', UserViews.signup_view, name='signup_views'),
     path('admin/rent/<int:pk>/send-pdf/', admin_send_pdf_rent_detail_to_email, name='send_pdf_to_email'),
 
 ]

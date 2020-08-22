@@ -1,0 +1,87 @@
+{% extends 'homebase.html' %}
+{% load static %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+{% block slider %}
+    <!--
+        <div class="hero inner-page" style="background-image: url('../static/images/about_us.jpg');">
+            <div class="container">
+                <div class="row align-items-end ">
+                    <div class="col-lg-10">
+                        <div class="intro">
+                            <h1 style="color:whitesmoke"><strong>My Account</strong></h1>
+                            <div class="custom-breadcrumbs"><a href="index.html" style="color:whitesmoke">Home</a> <span
+                                    class="mx-2" style="color:whitesmoke">/</span> <strong
+                                    style="color:whitesmoke">My Account</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+{% endblock %}
+
+
+{% block content %}
+    <div class="site-section bg-light mt-5">
+        <div class="container">
+            <div class="service-1 dark listing d-block  align-items-stretch">
+                <div class="listing-img h-100 mr-8">
+                    <div class="row">
+                        <div class=" container col-lg-3 mt-4 ">
+                            {% include "user_panel.html" %}
+                        </div>
+
+                        <div style="margin-top: 14%" class=" container col-lg-9">
+                            <h2 class="section-heading"><strong>User Profile</strong></h2>
+                            <p class="mb-5">Welcome to CarRental User Account, You Can Manage Your Profile Here.</p>
+
+                            <div class="row ml-3 mb-3 mt-1">
+                                <div>
+                                    <a href="/user/update" class="btn btn-outline-info">UPDATE PROFILE</a>
+                                    <a href="/user/password" class="btn btn-outline-info">CHANGE PASSWORD</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 ml-3 border-left">
+                                <div class="col-md-9">
+                                    <div class="billing-details">
+                                        <div class="section-title">
+                                            <h3 class="title">User Profile Update</h3>
+                                        </div>
+                                    </div>
+
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <fieldset class="form-group">
+                                            {{ user_form.as_p }}
+                                            {{ profile_form.as_p }}
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <button class="primary-btn" type="submit">Update</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /section -->
+    </div>
+    </div>
+
+
+{% endblock %}

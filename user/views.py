@@ -5,8 +5,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from car.models import Category
-from user.forms import SignUpForm
 from user.models import UserProfile
+
+from user.forms import SignUpForm
 
 
 @login_required(login_url='/login')  # Check login
@@ -68,3 +69,20 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 
+@login_required(login_url='/login')  # Check login
+def user_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return HttpResponseRedirect('/user')
+        else:
+            messages.error(request, 'Please correct the error below.<br>' + str(form.errors))
+            return HttpResponseRedirect('/user/password')
+    else:
+        # category = Category.objects.all()
+        form = PasswordChangeForm(request.user)
+        return render(request, 'user_password.html', {'form': form,  # 'category': category
+                                                      })
