@@ -17,8 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-
-import home
+from user import views as UserViews
 from home import views
 from rent.views import admin_send_pdf_rent_detail_to_email
 
@@ -35,9 +34,9 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('search/', views.search, name='search.urls'),
     path('category/<int:id>/<slug:slug>', views.ListCar, name='ListCar'),
-    path('logout/', views.logout_view, name='logout_view'),
-    path('login/', views.login_view, name='login_view'),
-    path('signup/', views.signup_view, name='signup_views'),
+    path('logout/', UserViews.logout_view, name='logout_view'),
+    path('login/', UserViews.login_view, name='login_view'),
+    path('signup/', UserViews.signup_view, name='signup_views'),
     path('admin/rent/<int:pk>/send-pdf/', admin_send_pdf_rent_detail_to_email, name='send_pdf_to_email'),
 
 ]

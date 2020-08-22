@@ -21,10 +21,10 @@ class UserProfile(models.Model):
     def user_profile(self):
         return ' [ ' + self.user.username + ' ] ' + self.user.first_name + ' ' + self.user.last_name
 
-    def image_tag(self):
+    def avatar_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.avatar.url))
 
-    image_tag.short_description = 'Image'
+    avatar_tag.short_description = 'Avatar'
 
 
 class UserProfileForm(ModelForm):
