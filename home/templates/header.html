@@ -34,7 +34,7 @@
 
 
     <header class="site-navbar site-navbar-target" role="banner">
-        <div class="container" style="max-width: 1350px;">
+        <div class="container" style="max-width: 1400px;">
             <div class="row align-items-center position-relative">
 
                 <div class="col-3">
@@ -97,27 +97,25 @@
                                             </div>
                                             <div class="dropdown" style="display: none">
                                                 <ul>
+                                                    <li><a href="/user"><img src="{% static 'images/account.png' %}"
+                                                    alt="Upload"/>
+                                                    My Account</a></li>
+
+                                                    <li><a href="#"><img src="{% static 'images/messages.png' %}"
+                                                    alt="Upload"/>
+                                                    Messages</a></li>
+
                                                     <li><a href="/logout/"><img
-                                                            src="{% static 'images/upload.png' %}"
+                                                            src="{% static 'images/logout.png' %}"
                                                             alt="Upload"/>
                                                         Logout</a></li>
-                                                    <li><a href="#"><img src="{% static 'images/messages.png' %}"
-                                                                         alt="Upload"/>
-                                                        Messages</a></li>
-                                                    <li><a href="#"><img src="{% static 'images/star.png' %}"
-                                                                         alt="Upload"/>
-                                                        Bookmarks</a></li>
-                                                    <li><a href="#"><img src="{% static 'images/search.png' %}"
-                                                                         alt="Upload"/>
-                                                        Search</a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </li>
                                 {% else %}
                                     <li>
-                                        <a href="/login" class="nav-link">Login</a> /
-                                        <a href="/signup" class="nav-link">Sing Up</a>
+                                        <a href="/login" class="nav-link">Login</a>/<a href="/signup" class="nav-link">Sing Up</a>
                                     </li>
                                 {% endif %}
                             </ul>

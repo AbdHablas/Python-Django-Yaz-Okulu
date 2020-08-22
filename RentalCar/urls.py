@@ -24,12 +24,13 @@ from rent.views import admin_send_pdf_rent_detail_to_email
 
 urlpatterns = [
     path('', include('home.urls')),
+    path('home/', include('home.urls')),
+    path('car/', include('car.urls')),
+    path('user/', include('user.urls')),
     path('rent', include('rent.urls')),
     path('contact', views.contact, name='contact'),
     path('references', views.references, name='references'),
     path('about', views.about, name='about'),
-    path('home/', include('home.urls')),
-    path('car/', include('car.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('search/', views.search, name='search.urls'),

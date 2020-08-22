@@ -119,6 +119,7 @@ def signup_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+
                 return HttpResponseRedirect('/')
             return render(request, 'login.html', context)
         else:

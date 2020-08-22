@@ -1,0 +1,66 @@
+<div class="billing-details">
+   <div class="d-flex justify-content-center h-100">
+			<div class="image_outer_container mt-4 mb-3">
+				<div class="green_icon"></div>
+				<div class="image_inner_container">
+					<img style="border-radius: inherit" src="{{ profile.avatar.url }}">
+				</div>
+			</div>
+		</div>
+     <h5 class="section-heading text-center mt-n2 "><strong>{{ user.first_name }} {{ user.last_name }}</strong></h5>
+    <div class="list-group">
+
+        <a href="/user" class="list-group-item active border-non">User Profile</a>
+        <a href="/user" class="list-group-item">My Orders</a>
+        <a href="/user/orders_product" class="list-group-item">My Order Product</a>
+        <a href="/user/comments" class="list-group-item">My Comments</a>
+        <a href="/user/favorits" class="list-group-item">My Favorits</a>
+        <a href="/user/products" class="list-group-item">My Products</a>
+       <a href="/logout" class="list-group-item">Logout</a>
+
+</div>
+</div>
+<style>
+    	html,body{
+			height: 100%;
+		}
+       .container{
+       	height: 100%;
+       	align-content: center;
+       }
+
+       .image_outer_container{
+       	margin-top: auto;
+       	margin-bottom: auto;
+       	border-radius: 50%;
+       	position: relative;
+           z-index: 0;
+       }
+.listing .listing-img img {
+    border-radius:-1px;
+}
+       .image_inner_container{
+       	border-radius: 50%;
+       	padding: 5px;
+        background: #833ab4;
+        background: -webkit-linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+        background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+       }
+       .image_inner_container img{
+       	height: 200px;
+       	width: 200px;
+       	border-radius: 50%;
+       	border: 5px solid white;
+       }
+
+       .image_outer_container .green_icon{
+         background-color: #4cd137;
+         position: absolute;
+         right: 30px;
+         bottom: 10px;
+         height: 30px;
+         width: 30px;
+         border:5px solid white;
+         border-radius: 50%;
+       }
+</style>

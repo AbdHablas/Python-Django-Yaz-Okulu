@@ -1,0 +1,96 @@
+{% extends 'homebase.html' %}
+{% load static %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+{% block slider %}
+<!--
+    <div class="hero inner-page" style="background-image: url('../static/images/about_us.jpg');">
+        <div class="container">
+            <div class="row align-items-end ">
+                <div class="col-lg-10">
+                    <div class="intro">
+                        <h1 style="color:whitesmoke"><strong>My Account</strong></h1>
+                        <div class="custom-breadcrumbs"><a href="index.html" style="color:whitesmoke">Home</a> <span
+                                class="mx-2" style="color:whitesmoke">/</span> <strong
+                                style="color:whitesmoke">My Account</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+{% endblock %}
+
+
+{% block content %}
+    <div class="site-section bg-light mt-5">
+        <div class="container">
+            <div class="service-1 dark listing d-block  align-items-stretch">
+                <div class="listing-img h-100 mr-8">
+                    <div class="row">
+                        <div class=" container col-lg-3 mt-4 ">
+                            {% include "user_panel.html" %}
+                        </div>
+
+                        <div style="margin-top: 14%" class=" container col-lg-9">
+                            <h2 class="section-heading"><strong>User Profile</strong></h2>
+                            <p class="mb-5">Welcome to CarRental User Account, You Can Manage Your Profile Here.</p>
+
+                            <div class="row ml-3 mb-3 mt-1">
+                                <div>
+                                    <a href="/user/update" class="btn btn-outline-info">Update Profile</a>
+                                    <a href="/user/password" class="btn btn-outline-info">Change Password</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 ml-3 border-left">
+                                <table class="shopping-cart-table table">
+
+                                    <tr>
+                                        <th class="text-left">Name Surname</th>
+                                        <td class="text-left">{{ user.first_name }} {{ user.last_name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left">Email</th>
+                                        <td class="text-left">{{ profile.user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left">Phone</th>
+                                        <td class="text-left">{{ profile.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left">Addres</th>
+                                        <td class="text-left">{{ profile.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left">City</th>
+                                        <td class="text-left">{{ profile.city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left">Country</th>
+                                        <td class="text-left">{{ profile.country }}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /section -->
+    </div>
+    </div>
+
+
+{% endblock %}
