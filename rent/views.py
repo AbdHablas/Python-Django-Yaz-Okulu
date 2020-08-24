@@ -18,21 +18,7 @@ from .models import Car, Rent
 from .serializers import RentSerializer
 
 
-class CheckCouponView(APIView):
-    permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
-        code = loads(request.body.decode('utf-8')).get('code')
-        try:
-            coupon = Coupon.objects.get(code=code)
-            if coupon:
-                coupon_expired_date = Coupon.objects.get(code=code).expired
-                now = timezone.now()
-                if now > coupon_expired_date:
-                    return Response({'status': 'expired'})
-                return Response({'status': 'valid', 'discount': coupon.discount})
-        except Coupon.DoesNotExist:
-            return Response({'status': 'invalid'})
 
 
 class CreateRentView(CreateAPIView):
@@ -71,23 +57,6 @@ class GetRentsView(ListAPIView):
             .filter(approved=False, canceled=False, finished=False, paid=False, user=self.request.user)
 
 
-class CancelRentView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def put(self, request, pk):
-        rent = get_object_or_404(Rent, pk=pk)
-        rent.canceled = True
-        rent.save()
-        messages.info(self.request,
-                      format_html('{} cancel the Rent <a href="{}">{}</a>',
-                                  self.request.user.get_full_name(),
-                                  f'http://localhost:8000/admin/rent/rent/{rent.pk}',
-                                  f'#{rent.pk}'))
-        send_rent_status_to_email.delay(pk, status='canceled')
-        return Response({'canceled': True})
-
-
-
 
 class RateCarView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -117,3 +86,17 @@ def admin_send_pdf_rent_detail_to_email(request, pk):
     return HttpResponseBadRequest('<i>Oops! The rent is not approved yet or it has already been paid.</i>')
 
 
+class CancelRentView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def put(self, request, pk):
+        rent = get_object_or_404(Rent, pk=pk)
+        rent.canceled = True
+        rent.save()
+        messages.info(self.request,
+                      format_html('{} cancel the Rent <a href="{}">{}</a>',
+                                  self.request.user.get_full_name(),
+                                  f'http://localhost:8000/admin/rent/rent/{rent.pk}',
+                                  f'#{rent.pk}'))
+        send_rent_status_to_email.delay(pk, status='canceled')
+        return Response({'canceled': True})

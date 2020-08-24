@@ -4,7 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from car.models import Category
+
+import rent
+from car.models import Category, Car
+from rent.models import Rent
 from user.forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
 
@@ -70,6 +73,8 @@ def logout_view(request):
 
 @login_required(login_url='/login')  # Check login
 def user_password(request):
+    current_user = request.user
+    profile = UserProfile.objects.get(user_id=current_user.id)
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -83,18 +88,20 @@ def user_password(request):
     else:
         categories = Category.objects.all()
         form = PasswordChangeForm(request.user)
-        return render(request, 'user_password.html', {'form': form,   'categories': categories
+        return render(request, 'user_password.html', {'form': form, 'categories': categories, 'profile': profile
                                                       })
 
 
 def user_update(request):
+    current_user = request.user
+    profile = UserProfile.objects.get(user_id=current_user.id)
     category = Category.objects.all()
     context = {
-        'category': category,
+        'category': category, 'profile': profile
     }
     user_form = UserUpdateForm(instance=request.user)
     profile_form = ProfileUpdateForm(
-    instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relatinon with user
+        instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relatinon with user
 
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)  # request.user is user  data
@@ -106,17 +113,45 @@ def user_update(request):
             profile = UserProfile.objects.get(user_id=current_user.id)
             context = {
                 'category': category,
-                'message': 'Your account has been updated',
+                'message': 'Your account has been updated!',
                 'profile': profile
             }
             return render(request, 'user_profile.html', context)
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(
-        instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relatinon with user
+            instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relatinon with user
         context = {
             'categories': category,
             'user_form': user_form,
-            'profile_form': profile_form
+            'profile_form': profile_form,
+            'profile': profile
         }
     return render(request, 'user_update.html', context)
+
+
+def user_orders(request):
+
+    category = Category.objects.all()
+    current_user = request.user
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    orders = Rent.objects.filter(user_id=current_user.id)
+    context = {'rent': rent,
+               'category': category,
+               'orders': orders,
+               'profile': profile
+               }
+    return render(request, 'user_orders.html', context)
+
+
+def cancel_rent(request):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Rent.objects.get(user_id=current_user.id, id=id)
+    orderitems = Car.objects.filter(order_id=id)
+    context = {
+        'category': category,
+        'order': order,
+        'orderitems': orderitems,
+    }
+    return render(request, 'user_order_detail.html', context)

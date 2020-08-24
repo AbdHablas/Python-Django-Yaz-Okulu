@@ -1,11 +1,14 @@
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+
+import rent
 from car.models import Car, Category
 from home.forms import SearchForm
 from home.models import Setting, ContactMessage, ContactForm
 
 from rent.models import Rent
+from user.models import UserProfile
 
 
 def index(request):
@@ -154,3 +157,43 @@ def rent_car(request):
 class RentCarForm(forms.Form):
     start_date = forms.DateTimeField()
     end_date = forms.DateTimeField()
+
+
+def user_orders(request):
+    setting = Setting.objects.get(pk=1)
+    current_user = request.user
+    orders = Rent.objects.filter(user_id=current_user.id)
+    categories = Category.objects.all()
+    cars = Car.objects.all()
+
+    profile = UserProfile.objects.get(user_id=current_user.id)
+
+    total = 0
+    for el in orders:
+        delta = el.end_date - el.start_date
+        total = total + (el.total_price*delta.days)
+    context = {'setting': setting, 'profile': profile, 'page': 'home', 'categories': categories, 'cars': cars, 'total': total,'orders': orders}
+    return render(request, 'user_orders.html', context)
+
+
+def cancel_rent(request):
+    rent_id = request.GET.get('id', '')
+    ActionRent = Rent.objec ,ts.get(id=rent_id)
+    ActionRent.delete()
+    category = Category.objects.all()
+    current_user = request.user
+    orders = Rent.objects.filter(user_id=current_user.id)
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    total = 0
+    for el in orders:
+        delta = el.end_date - el.start_date
+        total = total + (el.total_price * delta.days)
+    context = {'rent': rent,
+               'messages': 'Rent Deleted Successfully',
+               'tag': 'success',
+               'profile': profile,
+               'category': category,
+               'total': total,
+               'orders': orders,
+               }
+    return render(request, 'user_orders.html', context)
